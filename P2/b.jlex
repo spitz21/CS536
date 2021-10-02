@@ -75,94 +75,94 @@ return new Symbol(sym.EOF);
 \n        { CharNum.num = 1; }
 
 "bool" { 
-	Symbol S = new Symbol(sym.BOOL, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	Return S;
+		Symbol S = new Symbol(sym.BOOL, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		Return S;
 	}
 	
 	
 "receive" { 
-	Symbol S = new Symbol(sym.RECEIVE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	Return S;
+		Symbol S = new Symbol(sym.RECEIVE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		Return S;
 	}
 	
 	
 "int" { 
-	Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	Return S;
+		Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		Return S;
 	}
 	
 	
 "print" { 
-	Symbol S = new Symbol(sym.PRINT, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.PRINT, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "void" { 
-	Symbol S = new Symbol(sym.VOID, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.VOID, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "if" { 
-	Symbol S = new Symbol(sym.IF, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.IF, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "tru" { 
-	Symbol S = new Symbol(sym.TRUE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.TRUE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 
 
 "else" { 
-	Symbol S = new Symbol(sym.ELSE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.ELSE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 
 
 "fls" { 
-	Symbol S = new Symbol(sym.FALSE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.FALSE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "while" { 
-	Symbol S = new Symbol(sym.WHILE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.WHILE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "struct" { 
-	Symbol S = new Symbol(sym.STRUCT, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.STRUCT, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "ret" { 
-	Symbol S = new Symbol(sym.RETURN, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.RETURN, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}		
 
 	
 //Identifier
 ({LETTER}|'_')('_'|{LETTER}|{DIGIT})* {
-	Symbol S = new Symbol(sym.ID, new IDTokenVal(yyline+1, CharNum.num, yytext()));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.ID, new IDTokenVal(yyline+1, CharNum.num, yytext()));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
@@ -186,182 +186,182 @@ return new Symbol(sym.EOF);
  
 //String Literal 
 \"(([^\n\t\"\\]|\\[nt'\"?\\]))*\"	{
-	Symbol S = new Symbol(sym.STRINGLITERAL, new StrLitTokenVal(yyline+1, CharNum.num, yytext()));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.STRINGLITERAL, new StrLitTokenVal(yyline+1, CharNum.num, yytext()));
+		CharNum.num += yytext().length();
+		return S;
 	}
 
 
-"{" { 
-	Symbol S = new Symbol(sym.LCURLY, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+"{"	{ 
+		Symbol S = new Symbol(sym.LCURLY, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "," { 
-	Symbol S = new Symbol(sym.COMMA, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.COMMA, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 
 "--" { 
-	Symbol S = new Symbol(sym.MINUMINUS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.MINUMINUS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 
 "!" { 
-	Symbol S = new Symbol(sym.NOT, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.NOT, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "<" { 
-	Symbol S = new Symbol(sym.LESS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.LESS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "}" { 
-	Symbol S = new Symbol(sym.RCURLY, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.RCURLY, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 "." { 
-	Symbol S = new Symbol(sym.DOT, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.DOT, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "+" { 
-	Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "&&" { 
-	Symbol S = new Symbol(sym.AND, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.AND, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 ">" { 
-	Symbol S = new Symbol(sym.GREATER, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.GREATER, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "(" { 
-	Symbol S = new Symbol(sym.LPARENS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.LPARENS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 //TODO: write?
 "<<" { 
-	Symbol S = new Symbol(sym.WRITE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.WRITE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "-" { 
-	Symbol S = new Symbol(sym.MINUS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.MINUS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "||" { 
-	Symbol S = new Symbol(sym.OR, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.OR, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}	
 	
 	
 "<=" { 
-	Symbol S = new Symbol(sym.LESSEQ, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.LESSEQ, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 ")" { 
-	Symbol S = new Symbol(sym.RPARENS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.RPARENS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 //TODO: READ?	
 ">>" { 
-	Symbol S = new Symbol(sym.READ, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.READ, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "*" { 
-	Symbol S = new Symbol(sym.TIMES, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.TIMES, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "==" { 
-	Symbol S = new Symbol(sym.ASSIGN, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.ASSIGN, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 ">=" { 
-	Symbol S = new Symbol(sym.GREATEREQ, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.GREATEREQ, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 ";" { 
-	Symbol S = new Symbol(sym.SEMICOLON, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.SEMICOLON, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "++" { 
-	Symbol S = new Symbol(sym.PLUSPLUS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.PLUSPLUS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "/" { 
-	Symbol S = new Symbol(sym.DIVIDE, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.DIVIDE, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "!=" { 
-	Symbol S = new Symbol(sym.NOTEQUALS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.NOTEQUALS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}
 	
 	
 "=" { 
-	Symbol S = new Symbol(sym.EQUALS, new TokenVal(yyline+1, CharNum.num));
-	CharNum.num += yytext().length();
-	return S;
+		Symbol S = new Symbol(sym.EQUALS, new TokenVal(yyline+1, CharNum.num));
+		CharNum.num += yytext().length();
+		return S;
 	}				
 	
 	
