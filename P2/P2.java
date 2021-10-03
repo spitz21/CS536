@@ -14,8 +14,43 @@ public class P2 {
         // test all tokens
         testAllTokens();
         CharNum.num = 1;
+        //testEdgesAndExceptions();
     
         // ADD CALLS TO OTHER TEST METHODS HERE
+    }
+    
+    
+    private static void testEdgesAndExceptions() throws IOException {
+    	 FileReader inFile = null;
+         PrintWriter outFile = null;
+         try {
+             inFile = new FileReader("edgeTokens.in");
+             outFile = new PrintWriter(new FileWriter("edgeTokens.out"));
+         } catch (FileNotFoundException ex) {
+             System.err.println("File edgeTokens.in not found.");
+             System.exit(-1);
+         } catch (IOException ex) {
+             System.err.println("edgeTokens.out cannot be opened.");
+             System.exit(-1);
+         }
+         
+         Yylex my_scanner = new Yylex(inFile);
+         Symbol my_token = my_scanner.next_token();
+         while (my_token.sym != sym.EOF) {
+        	 switch (my_token.sym) {
+        	 case sym.ID:
+                 outFile.println(((IdTokenVal)my_token.value).idVal);
+                 break;
+             case sym.INTLITERAL:  
+                 outFile.println(((IntLitTokenVal)my_token.value).intVal);
+                 break;
+             case sym.STRINGLITERAL: 
+                 outFile.println(((StrLitTokenVal)my_token.value).strVal);
+                 break; 
+             default:
+ 				outFile.println("UNKNOWN TOKEN");
+             } // end switch   	 
+         }
     }
 
     /**

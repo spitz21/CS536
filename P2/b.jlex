@@ -77,21 +77,21 @@ return new Symbol(sym.EOF);
 "bool" { 
 		Symbol S = new Symbol(sym.BOOL, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
-		Return S;
+		return S;
 	}
 	
 	
 "receive" { 
 		Symbol S = new Symbol(sym.RECEIVE, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
-		Return S;
+		return S;
 	}
 	
 	
 "int" { 
 		Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
-		Return S;
+		return S;
 	}
 	
 	
@@ -158,23 +158,24 @@ return new Symbol(sym.EOF);
 	}		
 
 	
-//Identifier
-({LETTER}|'_')('_'|{LETTER}|{DIGIT})* {
-		Symbol S = new Symbol(sym.ID, new IDTokenVal(yyline+1, CharNum.num, yytext()));
+
+({LETTER}|'_')('_'|{LETTER}|{DIGIT})* {	//Identifier
+		Symbol S = new Symbol(sym.ID, new IdTokenVal(yyline+1, CharNum.num, yytext()));
 		CharNum.num += yytext().length();
 		return S;
 	}
 	
 	
-//Integer Literal
+
 {DIGIT}+  { // NOTE: the following computation of the integer value does NOT
             //       check for overflow.  This must be changed.
+            int val = 0;
             try {
-            	int val = (new Integer(yytext())).intValue();
+            	val = (new Integer(yytext())).intValue();
             	} catch (Exception e) {
             		val = Integer.MAX_VALUE;
             		ErrMsg.warn(yyline+1, CharNum.num, "integer literal too large; using max value");
-            	} Finally {
+            	} finally {
             	Symbol S = new Symbol(sym.INTLITERAL,
                              new IntLitTokenVal(yyline+1, CharNum.num, val));
             	CharNum.num += yytext().length();
@@ -184,8 +185,8 @@ return new Symbol(sym.EOF);
           }
          
  
-//String Literal 
-\"(([^\n\t\"\\]|\\[nt'\"?\\]))*\"	{
+ 
+\"(([^\n\t\"\\]|\\[nt'\"?\\]))*\"	{	//String Literal
 		Symbol S = new Symbol(sym.STRINGLITERAL, new StrLitTokenVal(yyline+1, CharNum.num, yytext()));
 		CharNum.num += yytext().length();
 		return S;
@@ -266,8 +267,8 @@ return new Symbol(sym.EOF);
 		return S;
 	}	
 	
-//TODO: write?
-"<<" { 
+
+"<<" {	//TODO: write?
 		Symbol S = new Symbol(sym.WRITE, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
 		return S;
@@ -301,8 +302,8 @@ return new Symbol(sym.EOF);
 		return S;
 	}
 	
-//TODO: READ?	
-">>" { 
+	
+">>" {	//TODO: READ?
 		Symbol S = new Symbol(sym.READ, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
 		return S;
@@ -317,7 +318,7 @@ return new Symbol(sym.EOF);
 	
 	
 "==" { 
-		Symbol S = new Symbol(sym.ASSIGN, new TokenVal(yyline+1, CharNum.num));
+		Symbol S = new Symbol(sym.EQUALS, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
 		return S;
 	}
@@ -359,11 +360,34 @@ return new Symbol(sym.EOF);
 	
 	
 "=" { 
-		Symbol S = new Symbol(sym.EQUALS, new TokenVal(yyline+1, CharNum.num));
+		Symbol S = new Symbol(sym.ASSIGN, new TokenVal(yyline+1, CharNum.num));
 		CharNum.num += yytext().length();
 		return S;
 	}				
 	
+
+
+((###)|(\/\/\/))+.*(\n) { CharNum.num = 1; }
+
+
+
+\"(([^\n\t\"\\]|\\[nt'\"?\\]))*(([^\"])|(\n))*	{	//Unterminated String Literals
+		ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal ignored");
+		CharNum.num = 1;
+	}
+		
+
+
+\"(([^\n\t\"\\]|\\[nt'\"?\\])|\\[^nt'\"?\\])*\"	{	//Bad String Literals
+		ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character ignored");
+		CharNum.num = 1;
+	}
+	
+	
+
+\"(([^\n\t\"\\]|\\[nt'\"?\\])|\\[^nt'\"?\\])*(([^\"])|(\n))* {	//Unterminated Bad String Literals
+		ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal with bad escaped character ignored");
+	}
 	
 																				
 {WHITESPACE}+  { CharNum.num += yytext().length(); }
@@ -377,3 +401,6 @@ return new Symbol(sym.EOF);
                          "ignoring illegal character: " + yytext());
             CharNum.num++;
           }
+          
+
+ 			
